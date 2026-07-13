@@ -11,6 +11,7 @@ ROOT = Path(__file__).parent
 STATIC_ROUTES = {
     "/": ("index.html", "text/html; charset=utf-8"),
     "/assets/proofbook.js": ("assets/proofbook.js", "text/javascript; charset=utf-8"),
+    "/assets/proofbook-core.mjs": ("assets/proofbook-core.mjs", "text/javascript; charset=utf-8"),
     "/assets/styles.css": ("assets/styles.css", "text/css; charset=utf-8"),
 }
 

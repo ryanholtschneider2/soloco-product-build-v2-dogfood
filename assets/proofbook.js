@@ -1,8 +1,13 @@
+import {
+  createBooking,
+  readBooking,
+  saveBooking,
+  STORAGE_KEY,
+} from "./proofbook-core.mjs";
+
 (() => {
   "use strict";
 
-  const STORAGE_KEY = "proofbook.booking.v1";
-  const RECORD_VERSION = 1;
   const defaultCatalog = [
     {
       id: "seeded-consultation",
@@ -92,34 +97,6 @@
     return { service, name, email: email.toLowerCase() };
   };
 
-  const createReference = () => {
-    const bytes = new Uint8Array(6);
-    crypto.getRandomValues(bytes);
-    const suffix = Array.from(bytes, (value) => value.toString(16).padStart(2, "0"))
-      .join("")
-      .toUpperCase();
-    return `PB-${suffix}`;
-  };
-
-  const isValidRecord = (record) => {
-    if (!record || typeof record !== "object") {
-      return false;
-    }
-    const service = catalog.find((item) => item.id === record.serviceId);
-    return record.version === RECORD_VERSION
-      && /^PB-[0-9A-F]{12}$/.test(record.reference)
-      && Boolean(service)
-      && record.serviceName === service.name
-      && record.schedule === service.schedule
-      && record.duration === service.duration
-      && typeof record.customerName === "string"
-      && record.customerName.length >= 2
-      && typeof record.email === "string"
-      && record.email.includes("@")
-      && typeof record.createdAt === "string"
-      && !Number.isNaN(Date.parse(record.createdAt));
-  };
-
   const showConfirmation = (record, isRevisit) => {
     elements.confirmationReference.textContent = record.reference;
     elements.confirmationService.textContent = `${record.serviceName} · ${record.duration}`;
@@ -157,22 +134,8 @@
     await nextFrame();
 
     try {
-      const record = {
-        version: RECORD_VERSION,
-        reference: createReference(),
-        serviceId: details.service.id,
-        serviceName: details.service.name,
-        schedule: details.service.schedule,
-        duration: details.service.duration,
-        customerName: details.name,
-        email: details.email,
-        createdAt: new Date().toISOString(),
-      };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(record));
-      const savedRecord = JSON.parse(localStorage.getItem(STORAGE_KEY));
-      if (!isValidRecord(savedRecord) || savedRecord.reference !== record.reference) {
-        throw new Error("Stored confirmation could not be verified");
-      }
+      const record = createBooking(details);
+      const savedRecord = saveBooking(localStorage, record, catalog);
       setStatus("");
       showConfirmation(savedRecord, false);
     } catch (_error) {
@@ -184,30 +147,15 @@
   };
 
   const restoreBooking = () => {
-    let serialized;
     try {
-      serialized = localStorage.getItem(STORAGE_KEY);
+      const result = readBooking(localStorage, catalog);
+      if (result.state === "valid") {
+        showConfirmation(result.record, true);
+      } else if (result.state === "invalid") {
+        setStatus("An unreadable saved booking was cleared. You can make a new one.", true);
+      }
     } catch (_error) {
       setStatus("Browser storage is unavailable. You can enter details, but confirmation may not be saved.", true);
-      return;
-    }
-    if (!serialized) {
-      return;
-    }
-
-    try {
-      const record = JSON.parse(serialized);
-      if (!isValidRecord(record)) {
-        throw new Error("Invalid saved booking");
-      }
-      showConfirmation(record, true);
-    } catch (_error) {
-      try {
-        localStorage.removeItem(STORAGE_KEY);
-      } catch (_storageError) {
-        // The invalid record remains isolated because it is never rendered.
-      }
-      setStatus("An unreadable saved booking was cleared. You can make a new one.", true);
     }
   };
 

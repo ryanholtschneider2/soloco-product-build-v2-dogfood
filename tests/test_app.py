@@ -36,6 +36,7 @@ class BuildSiteTest(unittest.TestCase):
 
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "assets" / "proofbook.js").is_file())
+            self.assertTrue((output / "assets" / "proofbook-core.mjs").is_file())
             self.assertTrue((output / "assets" / "styles.css").is_file())
             self.assertEqual(
                 json.loads(identity_path.read_text(encoding="utf-8")),
@@ -65,6 +66,7 @@ class ProductFixtureTest(unittest.TestCase):
         for path, content_type in (
             ("/", "text/html"),
             ("/assets/proofbook.js", "text/javascript"),
+            ("/assets/proofbook-core.mjs", "text/javascript"),
             ("/assets/styles.css", "text/css"),
         ):
             with self.subTest(path=path):
@@ -95,7 +97,10 @@ class ProductFixtureTest(unittest.TestCase):
 
     def test_booking_surface_has_accessible_state_contract(self) -> None:
         html = (ROOT / "index.html").read_text(encoding="utf-8")
-        script = (ROOT / "assets" / "proofbook.js").read_text(encoding="utf-8")
+        script = "\n".join(
+            (ROOT / "assets" / name).read_text(encoding="utf-8")
+            for name in ("proofbook.js", "proofbook-core.mjs")
+        )
 
         for required_markup in (
             'id="booking-form"',
@@ -110,9 +115,9 @@ class ProductFixtureTest(unittest.TestCase):
                 self.assertIn(required_markup, html)
 
         for required_behavior in (
-            "crypto.getRandomValues",
-            "localStorage.setItem",
-            "localStorage.getItem",
+            "cryptoSource.getRandomValues",
+            "storage.setItem",
+            "storage.getItem",
             "localStorage.removeItem",
             "aria-busy",
             "requestAnimationFrame",
