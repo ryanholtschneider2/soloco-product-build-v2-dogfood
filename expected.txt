@@ -1,1 +1,1 @@
-INTENTIONAL-CI-FAILURE
+Booking confirmed.
