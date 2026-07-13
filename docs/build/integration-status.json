@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "base_sha": "db177b063bf36e1137f0c79de0dc211dee14ddce",
+  "canonical_integration_branch": "product-build/integration",
+  "canonical_integration_sha": null,
+  "required_work": [
+    {
+      "id": "pbv2-12b",
+      "branch": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "integrated": false,
+      "ancestry_verified": false,
+      "contract_coverage_verified": false
+    }
+  ],
+  "integration_complete": false,
+  "notes": [
+    "The integration branch currently starts at the base SHA; contract artifacts are not yet committed.",
+    "A green seed CI run is not implementation or integration evidence."
+  ]
+}

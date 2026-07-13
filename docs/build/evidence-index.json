@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "product_id": "proofbook",
+  "canonical_sha": null,
+  "preview_url": null,
+  "seed_instructions": "Select the seeded consultation and use a non-production fixture name/email. No customer data leaves the browser.",
+  "status": "not_started",
+  "coverage": {
+    "roles": [],
+    "routes": [],
+    "states": [],
+    "viewports": []
+  },
+  "reports": {
+    "functional": [],
+    "visual": [],
+    "accessibility": [],
+    "security": [],
+    "performance": [],
+    "smoke": [],
+    "product_eval": []
+  },
+  "screenshots": [],
+  "video": [],
+  "release_evidence": null,
+  "stale_evidence_rejected": true
+}

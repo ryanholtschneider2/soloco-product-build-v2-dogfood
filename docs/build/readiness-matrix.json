@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "contract_version": 1,
+  "base_sha": "db177b063bf36e1137f0c79de0dc211dee14ddce",
+  "canonical_integration_branch": "product-build/integration",
+  "items": [
+    {
+      "id": "PB-JOURNEY-001",
+      "title": "Explicit seeded-service booking journey",
+      "status": "defined",
+      "owner_work_ref": "pbv2-12b",
+      "proof_obligation": "Browser proof covers selection, valid details, confirmation, duplicate prevention, and clear-and-rebook.",
+      "evidence_refs": []
+    },
+    {
+      "id": "PB-STATE-001",
+      "title": "Accessible initial, invalid, submitting, error, unavailable, confirmed, and revisit states",
+      "status": "defined",
+      "owner_work_ref": "pbv2-12b",
+      "proof_obligation": "Browser and accessibility reports cover every declared state, keyboard focus, and announcements.",
+      "evidence_refs": []
+    },
+    {
+      "id": "PB-DURABLE-001",
+      "title": "Same-browser durable confirmation reference",
+      "status": "defined",
+      "owner_work_ref": "pbv2-12b",
+      "proof_obligation": "A valid PB- record survives reload; malformed/storage-failure paths never claim success.",
+      "evidence_refs": []
+    },
+    {
+      "id": "PB-SHA-001",
+      "title": "Exact deployed SHA identity",
+      "status": "defined",
+      "owner_work_ref": "pbv2-12b",
+      "proof_obligation": "Live identity JSON contains proofbook and the full canonical SHA; mismatch and placeholder checks fail.",
+      "evidence_refs": []
+    },
+    {
+      "id": "PB-DESIGN-001",
+      "title": "Warm editorial responsive proof moment",
+      "status": "defined",
+      "owner_work_ref": "pbv2-12b",
+      "proof_obligation": "Ready and confirmed screenshots at 390x844 and 1440x900 pass DESIGN.md review with no overflow.",
+      "evidence_refs": []
+    },
+    {
+      "id": "PB-A11Y-001",
+      "title": "WCAG 2.2 AA interaction floor",
+      "status": "defined",
+      "owner_work_ref": "pbv2-12b",
+      "proof_obligation": "No critical automated violations; manual keyboard, visible-focus, error, busy, and confirmation checks pass.",
+      "evidence_refs": []
+    },
+    {
+      "id": "PB-SEC-001",
+      "title": "Local-only customer data and safe rendering",
+      "status": "defined",
+      "owner_work_ref": "pbv2-12b",
+      "proof_obligation": "Security report confirms no external data transmission or third-party runtime and malformed storage is inert.",
+      "evidence_refs": []
+    },
+    {
+      "id": "PB-PERF-001",
+      "title": "Small fast static experience",
+      "status": "defined",
+      "owner_work_ref": "pbv2-12b",
+      "proof_obligation": "Mobile Lighthouse is at least 90 with LCP <=2.5s, CLS <=0.1, and product payload <100 KiB.",
+      "evidence_refs": []
+    },
+    {
+      "id": "PB-GTM-001",
+      "title": "Claims stay inside fixture capability",
+      "status": "defined",
+      "owner_work_ref": "pbv2-uuv",
+      "proof_obligation": "CEO digest and product eval state same-browser/static limitations and imply no excluded fulfillment capability.",
+      "evidence_refs": []
+    },
+    {
+      "id": "PB-LIVE-001",
+      "title": "Exact-SHA live post-deploy proof",
+      "status": "defined",
+      "owner_work_ref": "pbv2-uuv",
+      "proof_obligation": "Live preview, deployment record, post-deploy customer journey, and identity smoke all reference one SHA.",
+      "evidence_refs": []
+    }
+  ]
+}

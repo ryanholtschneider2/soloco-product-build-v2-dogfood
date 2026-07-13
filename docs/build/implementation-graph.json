@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "graph_version": 1,
+  "parent_epic_id": "pbv2-uuv",
+  "canonical_integration_branch": "product-build/integration",
+  "nodes": [
+    {
+      "id": "pbv2-12b",
+      "kind": "implementation",
+      "title": "Implement the exact-SHA ProofBook booking outcome",
+      "status": "ready",
+      "formula": "software-dev-agentic",
+      "dependencies": [],
+      "target_branch": "product-build/integration",
+      "write_scope": [
+        "index.html",
+        "app.py",
+        "tests/**",
+        ".github/workflows/ci.yml",
+        "expected.txt",
+        "static build identity files or scripts"
+      ],
+      "contract_item_ids": [
+        "PB-JOURNEY-001",
+        "PB-STATE-001",
+        "PB-DURABLE-001",
+        "PB-SHA-001",
+        "PB-DESIGN-001",
+        "PB-A11Y-001",
+        "PB-SEC-001",
+        "PB-PERF-001"
+      ],
+      "proof_obligations": [
+        "Repository gate and CI",
+        "Functional browser report for all declared states",
+        "Responsive screenshots at 390x844 and 1440x900",
+        "Automated accessibility and manual keyboard/focus report",
+        "Security/privacy and malformed-storage report",
+        "Mobile performance report",
+        "Exact-SHA identity and post-deploy smoke"
+      ],
+      "attempt_key": "pbv2-12b:software-dev-agentic",
+      "attempt_cap": 2
+    },
+    {
+      "id": "proofbook-live-proof",
+      "kind": "proof",
+      "title": "Index exact-SHA launch evidence",
+      "status": "blocked_on_integration",
+      "formula": "product-live-proof",
+      "dependencies": [
+        "pbv2-12b"
+      ],
+      "target_branch": "product-build/integration",
+      "write_scope": [
+        "docs/build/evidence/**",
+        "docs/build/evidence-index.json",
+        "docs/build/integration-status.json",
+        "docs/build/ceo-digest.md"
+      ],
+      "contract_item_ids": [
+        "PB-GTM-001",
+        "PB-LIVE-001"
+      ],
+      "proof_obligations": [
+        "Every readiness item has current evidence at the canonical integration SHA",
+        "Live preview SHA equals canonical integration SHA",
+        "Critical customer journey and post-deploy smoke pass"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "pbv2-12b",
+      "to": "proofbook-live-proof",
+      "type": "blocks"
+    }
+  ]
+}
