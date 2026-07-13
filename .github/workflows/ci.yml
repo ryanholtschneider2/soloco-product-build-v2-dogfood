@@ -51,7 +51,7 @@ jobs:
           PAGE_URL: ${{ needs.deploy.outputs.page_url }}
         run: |
           curl -fsSL --retry 12 --retry-all-errors --retry-delay 5 "$PAGE_URL" | grep -F 'Booking confirmed'
-          curl -fsSL "$PAGE_URL.well-known/soloco-build.json" -o /tmp/soloco-build.json
+          curl -fsSL "${PAGE_URL%/}/.well-known/soloco-build.json" -o /tmp/soloco-build.json
           python3 - <<'PY'
           import json
           import os

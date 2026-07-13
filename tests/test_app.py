@@ -7,6 +7,7 @@ import threading
 import unittest
 import urllib.error
 import urllib.request
+from email.message import Message
 from http.server import ThreadingHTTPServer
 from pathlib import Path
 from unittest.mock import patch
@@ -56,9 +57,9 @@ class ProductFixtureTest(unittest.TestCase):
         cls.server.server_close()
         cls.thread.join()
 
-    def fetch(self, path: str) -> tuple[bytes, urllib.response.addinfourl]:
-        response = urllib.request.urlopen(self.base_url + path, timeout=2)
-        return response.read(), response
+    def fetch(self, path: str) -> tuple[bytes, Message]:
+        with urllib.request.urlopen(self.base_url + path, timeout=2) as response:
+            return response.read(), response.headers
 
     def test_server_exposes_product_assets_and_security_headers(self) -> None:
         for path, content_type in (
@@ -67,26 +68,30 @@ class ProductFixtureTest(unittest.TestCase):
             ("/assets/styles.css", "text/css"),
         ):
             with self.subTest(path=path):
-                body, response = self.fetch(path)
+                body, headers = self.fetch(path)
                 self.assertTrue(body)
-                self.assertIn(content_type, response.headers["Content-Type"])
-                self.assertEqual(response.headers["X-Content-Type-Options"], "nosniff")
-                self.assertEqual(response.headers["Referrer-Policy"], "no-referrer")
+                self.assertIn(content_type, headers["Content-Type"])
+                self.assertEqual(headers["X-Content-Type-Options"], "nosniff")
+                self.assertEqual(headers["Referrer-Policy"], "no-referrer")
 
     def test_runtime_identity_matches_configured_exact_sha(self) -> None:
         with patch.dict(os.environ, {"GIT_SHA": TEST_SHA}):
-            body, response = self.fetch("/.well-known/soloco-build.json")
+            body, headers = self.fetch("/.well-known/soloco-build.json")
 
-        self.assertIn("application/json", response.headers["Content-Type"])
+        self.assertIn("application/json", headers["Content-Type"])
         self.assertEqual(
             json.loads(body),
             {"product_id": "proofbook", "git_sha": TEST_SHA},
         )
 
     def test_unknown_route_is_404(self) -> None:
-        with self.assertRaises(urllib.error.HTTPError) as error:
+        try:
             self.fetch("/not-a-product-route")
-        self.assertEqual(error.exception.code, 404)
+        except urllib.error.HTTPError as error:
+            self.assertEqual(error.code, 404)
+            error.close()
+        else:
+            self.fail("unknown route did not return 404")
 
     def test_booking_surface_has_accessible_state_contract(self) -> None:
         html = (ROOT / "index.html").read_text(encoding="utf-8")

@@ -156,19 +156,18 @@
     setStatus("Saving your confirmation in this browser.");
     await nextFrame();
 
-    const record = {
-      version: RECORD_VERSION,
-      reference: createReference(),
-      serviceId: details.service.id,
-      serviceName: details.service.name,
-      schedule: details.service.schedule,
-      duration: details.service.duration,
-      customerName: details.name,
-      email: details.email,
-      createdAt: new Date().toISOString(),
-    };
-
     try {
+      const record = {
+        version: RECORD_VERSION,
+        reference: createReference(),
+        serviceId: details.service.id,
+        serviceName: details.service.name,
+        schedule: details.service.schedule,
+        duration: details.service.duration,
+        customerName: details.name,
+        email: details.email,
+        createdAt: new Date().toISOString(),
+      };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(record));
       const savedRecord = JSON.parse(localStorage.getItem(STORAGE_KEY));
       if (!isValidRecord(savedRecord) || savedRecord.reference !== record.reference) {
