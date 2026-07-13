@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "manifest_version": 1,
+  "product_id": "proofbook",
+  "lifecycle_stage": 2,
+  "base_branch": "main",
+  "base_sha": "db177b063bf36e1137f0c79de0dc211dee14ddce",
+  "canonical_integration_branch": "product-build/integration",
+  "canonical_integration_sha": null,
+  "build_pack": {
+    "formula": "software-dev-agentic",
+    "prefect_orchestration_version": "0.2.0",
+    "runtime": {
+      "backend": "codex-tmux",
+      "provider": "openai",
+      "account": "codex-personal",
+      "account_class": "personal",
+      "model": "gpt-5.5",
+      "effort": "high"
+    }
+  },
+  "stack": [
+    "Python 3.13 standard-library HTTP fixture",
+    "static HTML, CSS, and JavaScript",
+    "GitHub Actions and GitHub Pages"
+  ],
+  "authoritative_docs": [
+    "PRODUCT.md",
+    "STRATEGY.md",
+    "ROADMAP.md",
+    "DESIGN.md",
+    "docs/build/product-contract.md"
+  ],
+  "missing_authoritative_docs": [
+    "BUSINESS.md"
+  ],
+  "parent_epic_id": "pbv2-uuv",
+  "required_work_ids": [
+    "pbv2-12b"
+  ],
+  "proof_obligation_ids": [
+    "PB-JOURNEY-001",
+    "PB-STATE-001",
+    "PB-DURABLE-001",
+    "PB-SHA-001",
+    "PB-DESIGN-001",
+    "PB-A11Y-001",
+    "PB-SEC-001",
+    "PB-PERF-001",
+    "PB-GTM-001",
+    "PB-LIVE-001"
+  ]
+}
