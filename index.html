@@ -3,34 +3,127 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ProofBook</title>
-  <style>
-    body { margin: 0; background: #f4f0e8; color: #17201b; font: 16px/1.5 Georgia, serif; }
-    main { max-width: 760px; margin: 0 auto; padding: 10vh 24px; }
-    h1 { font-size: clamp(3rem, 10vw, 6rem); line-height: .9; letter-spacing: -.06em; }
-    .eyebrow { font: 700 12px/1 system-ui; letter-spacing: .14em; text-transform: uppercase; }
-    .card { border-top: 2px solid #17201b; padding-top: 24px; }
-    button { background: #bd5b38; color: white; border: 0; padding: 14px 20px; font: 700 15px system-ui; cursor: pointer; }
-    #confirmation { margin-top: 32px; padding: 20px; border: 2px solid #17201b; }
-  </style>
+  <meta name="description" content="Confirm the seeded ProofBook consultation and keep the reference in this browser.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <title>ProofBook — book the seeded consultation</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/proofbook.js" defer></script>
 </head>
 <body>
+  <header class="site-header">
+    <a class="wordmark" href="/" aria-label="ProofBook home">ProofBook</a>
+    <p>One service. One clear proof.</p>
+  </header>
+
   <main>
-    <p class="eyebrow">Proof-first booking</p>
-    <h1>Book the service.</h1>
-    <section class="card">
-      <h2>Seeded consultation</h2>
-      <p>Tomorrow at 10:00 AM · 30 minutes</p>
-      <button id="confirm" type="button">Confirm booking</button>
-      <div id="confirmation" hidden tabindex="-1"><strong>Booking confirmed.</strong><br>Reference PB-2026-0713</div>
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">Proof-first booking</p>
+      <h1 id="page-title">Book the service.<br><em>Keep the proof.</em></h1>
+      <p class="lede">A deliberately small booking: choose the seeded consultation, add your details, and receive a reference that stays in this browser.</p>
+    </section>
+
+    <section class="booking-shell" aria-label="Booking details">
+      <form id="booking-form" novalidate>
+        <div class="step-heading">
+          <span aria-hidden="true">01</span>
+          <div>
+            <p class="eyebrow">Select a service</p>
+            <h2>What you’re booking</h2>
+          </div>
+        </div>
+
+        <fieldset id="service-fieldset" aria-describedby="service-guidance service-error">
+          <legend class="visually-hidden">Available services</legend>
+          <p id="service-guidance" class="guidance">Choose the single seeded fixture to continue.</p>
+          <div id="service-options" class="service-options">
+            <label class="service-option">
+              <input type="radio" name="service" value="seeded-consultation" data-name="Seeded consultation" data-schedule="Tomorrow at 10:00 AM" data-duration="30 minutes">
+              <span class="choice-mark" aria-hidden="true"></span>
+              <span class="service-copy">
+                <strong>Seeded consultation</strong>
+                <span>Tomorrow at 10:00 AM</span>
+              </span>
+              <span class="duration">30 min</span>
+            </label>
+          </div>
+          <p id="service-error" class="field-error" aria-live="polite"></p>
+        </fieldset>
+
+        <div class="customer-step">
+          <div class="step-heading">
+            <span aria-hidden="true">02</span>
+            <div>
+              <p class="eyebrow">Customer details</p>
+              <h2>Where to place the name</h2>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="customer-name">Your name</label>
+              <input id="customer-name" name="customer-name" type="text" autocomplete="name" maxlength="80" aria-describedby="name-error" required>
+              <p id="name-error" class="field-error" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="customer-email">Email address</label>
+              <input id="customer-email" name="customer-email" type="email" autocomplete="email" inputmode="email" maxlength="254" aria-describedby="email-help email-error" required>
+              <p id="email-help" class="field-help">Used only inside this browser record.</p>
+              <p id="email-error" class="field-error" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <p>No account. No payment. No data leaves this page.</p>
+          <button id="confirm" type="submit" disabled>
+            <span>Confirm booking</span>
+            <span aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <p id="status" class="status" role="status" aria-live="polite" tabindex="-1"></p>
+      </form>
+
+      <section id="unavailable" class="unavailable" hidden tabindex="-1" aria-labelledby="unavailable-title">
+        <p class="eyebrow">Booking paused</p>
+        <h2 id="unavailable-title">The seeded service isn’t available.</h2>
+        <p>There’s nothing to select right now. Please return when the fixture service has been restored.</p>
+      </section>
+
+      <section id="confirmation" class="confirmation" hidden tabindex="-1" aria-labelledby="confirmation-title">
+        <div class="confirmation-mark" aria-hidden="true">PB</div>
+        <p class="eyebrow">Booking confirmed</p>
+        <h2 id="confirmation-title">Your proof is ready.</h2>
+        <p id="revisit-note" class="revisit-note" hidden>Restored from this browser.</p>
+        <dl>
+          <div class="reference-row">
+            <dt>Confirmation reference</dt>
+            <dd id="confirmation-reference"></dd>
+          </div>
+          <div>
+            <dt>Service</dt>
+            <dd id="confirmation-service"></dd>
+          </div>
+          <div>
+            <dt>When</dt>
+            <dd id="confirmation-schedule"></dd>
+          </div>
+          <div>
+            <dt>Name</dt>
+            <dd id="confirmation-name"></dd>
+          </div>
+        </dl>
+        <p class="durability-note">This proof is stored only in this browser. It does not reserve remote inventory or send a notification.</p>
+        <button id="clear-booking" class="secondary-action" type="button">Clear and book again</button>
+        <p id="confirmation-status" class="status" role="status" aria-live="polite"></p>
+      </section>
     </section>
   </main>
-  <script>
-    document.querySelector('#confirm').addEventListener('click', () => {
-      const proof = document.querySelector('#confirmation');
-      proof.hidden = false;
-      proof.focus();
-    });
-  </script>
+
+  <footer>
+    <p>ProofBook / Stage 2</p>
+    <p>A small, verifiable customer outcome.</p>
+  </footer>
+
+  <noscript><p class="noscript">ProofBook needs JavaScript to create and store a confirmation in this browser.</p></noscript>
 </body>
 </html>
