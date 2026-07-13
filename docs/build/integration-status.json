@@ -2,21 +2,27 @@
   "schema_version": 1,
   "base_sha": "db177b063bf36e1137f0c79de0dc211dee14ddce",
   "canonical_integration_branch": "product-build/integration",
-  "canonical_integration_sha": null,
+  "canonical_integration_sha": "76f4cced71fee21832fc2402b8efa9ed56b907e3",
+  "release_branch": "main",
+  "release_sha": "04196921264d9897e8e547a8e0a2cef1ad43f8fb",
   "required_work": [
     {
       "id": "pbv2-12b",
-      "branch": null,
-      "commit_sha": null,
-      "pr_url": null,
-      "integrated": false,
+      "branch": "agentic-pbv2-12b",
+      "commit_sha": "20382f0910953ad631587f7f1a3b139d5826bb2b",
+      "pr_url": "https://github.com/ryanholtschneider2/soloco-product-build-v2-dogfood/pull/1",
+      "integration_merge_sha": "76f4cced71fee21832fc2402b8efa9ed56b907e3",
+      "integrated": true,
       "ancestry_verified": false,
-      "contract_coverage_verified": false
+      "tree_equivalence_verified": true,
+      "contract_coverage_verified": true
     }
   ],
-  "integration_complete": false,
+  "integration_complete": true,
+  "release_complete": true,
   "notes": [
-    "The integration branch currently starts at the base SHA; contract artifacts are not yet committed.",
-    "A green seed CI run is not implementation or integration evidence."
+    "PR #1 and PR #2 used squash merges, so source commits are not ancestors of their landing commits.",
+    "The source, integration, and release trees are byte-identical at tree c74f8c45c62c422f2269b59d17478a03bdfa967e.",
+    "The release SHA passed CI, Pages deployment, exact-SHA smoke, and live browser proof."
   ]
 }

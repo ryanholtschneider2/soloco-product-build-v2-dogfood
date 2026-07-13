@@ -1,40 +1,22 @@
 # ProofBook Stage 2 CEO digest
 
-## Current state: DEFINED
+## Current product state: RELEASED
 
-The whole-product contract is defined against base commit
-`db177b063bf36e1137f0c79de0dc211dee14ddce`. The canonical integration branch
-is `product-build/integration`; it does not yet have a committed integration SHA
-or preview. One existing P0 epic, `pbv2-uuv`, owns the release. Its single
-dependency-ready implementation child is `pbv2-12b`.
+ProofBook's exact-SHA booking outcome is merged, deployed, and live-verified at `04196921264d9897e8e547a8e0a2cef1ad43f8fb`:
 
-## Product truth
+- Preview: <https://ryanholtschneider2.github.io/soloco-product-build-v2-dogfood/>
+- Release PR: <https://github.com/ryanholtschneider2/soloco-product-build-v2-dogfood/pull/2>
+- Green CI/deploy/smoke: <https://github.com/ryanholtschneider2/soloco-product-build-v2-dogfood/actions/runs/29226016156>
+- Evidence index: `docs/build/evidence-index.json`
 
-The R1 outcome is a static proof-first fixture: explicitly select the seeded
-consultation, enter minimal customer details, persist a random confirmation
-reference in the same browser, restore it after reload, and correlate the live
-surface to one exact commit. The warm editorial `DESIGN.md` remains binding.
+## Verified outcome
 
-The contract explicitly excludes accounts, payments, remote inventory,
-calendar sync, notifications, multi-device retrieval, and operator tooling.
-No GTM statement should imply those capabilities. `BUSINESS.md` is absent, so
-`PRODUCT.md`, `STRATEGY.md`, `ROADMAP.md`, `DESIGN.md`, and stage/config are the
-available authoritative inputs.
+An anonymous customer can select the seeded consultation, enter minimal details, receive one `PB-` confirmation reference, reload and restore it in the same browser, clear it, and book again. Live proof covers invalid, submitting/duplicate, storage-error, unavailable, confirmed, revisit, and malformed-storage states at 390x844 and 1440x900. Lighthouse scored 1.00 for performance and accessibility; LCP was 837 ms, CLS was 0, and the product payload remained under 25 KiB.
 
-## Evidence and delivery
+The implementation, integration, and release commits are squash-related rather than ancestor-related, but all three Git trees are byte-identical. The deployed identity endpoint returns the exact release SHA.
 
-- Seed main SHA: `db177b063bf36e1137f0c79de0dc211dee14ddce`
-- Seed lifecycle run: CI, Pages deploy, and shallow text smoke passed at the
-  base SHA; it is not accepted as Stage 2 product proof
-- Seed preview: `https://ryanholtschneider2.github.io/soloco-product-build-v2-dogfood/`;
-  no preview is yet attributed to the integration SHA
-- Implementation: `pbv2-12b`, ready for `software-dev-agentic`
-- Evidence index: initialized with no evidence; nothing is VERIFIED
-- Blockers: none. Missing implementation and proof are active product work.
+## Exceptions and launch claims
 
-## Next move
+The only known exception is a harmless same-origin favicon 404, which lowers Lighthouse best-practices to 0.96 but does not affect an acceptance obligation. `BUSINESS.md` remains absent; existing product, strategy, roadmap, design, contract, and stage configuration are otherwise coherent.
 
-Dispatch `pbv2-12b` with the stamped Codex runtime against
-`product-build/integration`, supervise its critic loop to terminal state, invoke
-the PR sheriff for the child PR, then run the live-proof obligations at the
-resulting exact integration SHA. No CEO decision is required.
+Launch language must remain within the verified fixture: no account, payment, remote inventory, calendar sync, notification, multi-device retrieval, or production booking operations. No product work, blocker, GTM mismatch, or CEO decision remains. Documentation-only evidence reconciliation is in flight as PR #3 and does not change the currently deployed product SHA.

@@ -1,0 +1,1 @@
+window.PROOFBOOK_CATALOG = [];

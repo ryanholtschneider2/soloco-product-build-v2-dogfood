@@ -1,0 +1,5 @@
+2607 /tmp/soloco-product-build-v2-dogfood-product-reconcile/assets/proofbook-core.mjs
+9227 /tmp/soloco-product-build-v2-dogfood-product-reconcile/assets/styles.css
+7197 /tmp/soloco-product-build-v2-dogfood-product-reconcile/assets/proofbook.js
+3447 /tmp/soloco-product-build-v2-dogfood-product-reconcile/tests/proofbook-core.test.mjs
+5829 /tmp/soloco-product-build-v2-dogfood-product-reconcile/index.html
