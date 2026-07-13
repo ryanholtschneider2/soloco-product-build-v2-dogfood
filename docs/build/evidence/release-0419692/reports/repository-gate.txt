@@ -1,0 +1,72 @@
+python3 -m compileall -q app.py tests
+python3 -m compileall -q app.py tests
+node --check assets/proofbook.js
+node --check assets/proofbook-core.mjs
+python3 -m unittest discover -s tests -v
+test_identity_requires_exact_sha (test_app.BuildSiteTest.test_identity_requires_exact_sha) ... ok
+test_static_build_can_replace_its_own_prior_output (test_app.BuildSiteTest.test_static_build_can_replace_its_own_prior_output) ... ok
+test_static_build_contains_product_and_identity (test_app.BuildSiteTest.test_static_build_contains_product_and_identity) ... ok
+test_static_build_refuses_to_delete_unowned_output (test_app.BuildSiteTest.test_static_build_refuses_to_delete_unowned_output) ... ok
+test_booking_surface_has_accessible_state_contract (test_app.ProductFixtureTest.test_booking_surface_has_accessible_state_contract) ... ok
+test_runtime_identity_matches_configured_exact_sha (test_app.ProductFixtureTest.test_runtime_identity_matches_configured_exact_sha) ... 127.0.0.1 - - [13/Jul/2026 01:26:16] "GET /.well-known/soloco-build.json HTTP/1.1" 200 -
+ok
+test_server_exposes_product_assets_and_security_headers (test_app.ProductFixtureTest.test_server_exposes_product_assets_and_security_headers) ... 127.0.0.1 - - [13/Jul/2026 01:26:16] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [13/Jul/2026 01:26:16] "GET /assets/proofbook.js HTTP/1.1" 200 -
+127.0.0.1 - - [13/Jul/2026 01:26:16] "GET /assets/proofbook-core.mjs HTTP/1.1" 200 -
+127.0.0.1 - - [13/Jul/2026 01:26:16] "GET /assets/styles.css HTTP/1.1" 200 -
+ok
+test_unknown_route_is_404 (test_app.ProductFixtureTest.test_unknown_route_is_404) ... 127.0.0.1 - - [13/Jul/2026 01:26:16] code 404, message Not Found
+127.0.0.1 - - [13/Jul/2026 01:26:16] "GET /not-a-product-route HTTP/1.1" 404 -
+ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.510s
+
+OK
+node --test tests/proofbook-core.test.mjs
+TAP version 13
+# Subtest: reference uses six cryptographically supplied bytes
+ok 1 - reference uses six cryptographically supplied bytes
+  ---
+  duration_ms: 0.792568
+  type: 'test'
+  ...
+# Subtest: booking normalizes customer details and records UTC creation
+ok 2 - booking normalizes customer details and records UTC creation
+  ---
+  duration_ms: 0.501399
+  type: 'test'
+  ...
+# Subtest: saved booking must round-trip before success
+ok 3 - saved booking must round-trip before success
+  ---
+  duration_ms: 0.839695
+  type: 'test'
+  ...
+# Subtest: failed write or mismatched read never returns confirmation
+ok 4 - failed write or mismatched read never returns confirmation
+  ---
+  duration_ms: 0.913569
+  type: 'test'
+  ...
+# Subtest: malformed and incompatible records are discarded safely
+ok 5 - malformed and incompatible records are discarded safely
+  ---
+  duration_ms: 0.328178
+  type: 'test'
+  ...
+# Subtest: empty storage has no booking and read failures propagate
+ok 6 - empty storage has no booking and read failures propagate
+  ---
+  duration_ms: 0.154508
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 48.453473

@@ -1,12 +1,15 @@
 {
   "schema_version": 1,
-  "manifest_version": 1,
+  "manifest_version": 2,
   "product_id": "proofbook",
   "lifecycle_stage": 2,
   "base_branch": "main",
   "base_sha": "db177b063bf36e1137f0c79de0dc211dee14ddce",
   "canonical_integration_branch": "product-build/integration",
-  "canonical_integration_sha": null,
+  "canonical_integration_sha": "76f4cced71fee21832fc2402b8efa9ed56b907e3",
+  "release_branch": "main",
+  "release_sha": "04196921264d9897e8e547a8e0a2cef1ad43f8fb",
+  "preview_url": "https://ryanholtschneider2.github.io/soloco-product-build-v2-dogfood/",
   "build_pack": {
     "formula": "software-dev-agentic",
     "prefect_orchestration_version": "0.2.0",
@@ -15,9 +18,10 @@
       "provider": "codex",
       "account": "codex-personal",
       "account_class": "personal",
-      "model": "gpt-5.4",
-      "effort": "xhigh"
-    }
+      "model": "gpt-5.5",
+      "effort": "high"
+    },
+    "flow_run_id": "d429e46c-98bb-4c58-a9f8-c4e3ce0f19c9"
   },
   "stack": [
     "Python 3.13 standard-library HTTP fixture",
@@ -36,7 +40,8 @@
   ],
   "parent_epic_id": "pbv2-uuv",
   "required_work_ids": [
-    "pbv2-12b"
+    "pbv2-12b",
+    "pbv2-2wo"
   ],
   "proof_obligation_ids": [
     "PB-JOURNEY-001",

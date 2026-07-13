@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "product_id": "proofbook",
+  "release_sha": "04196921264d9897e8e547a8e0a2cef1ad43f8fb",
+  "merged": true,
+  "merge_pr": "https://github.com/ryanholtschneider2/soloco-product-build-v2-dogfood/pull/2",
+  "merged_at": "2026-07-13T05:18:49Z",
+  "deployed": true,
+  "deploy_url": "https://ryanholtschneider2.github.io/soloco-product-build-v2-dogfood/",
+  "deployment_run": "https://github.com/ryanholtschneider2/soloco-product-build-v2-dogfood/actions/runs/29226016156",
+  "deployment_job": "https://github.com/ryanholtschneider2/soloco-product-build-v2-dogfood/actions/runs/29226016156/job/86740122489",
+  "post_deploy_smoke_passed": true,
+  "smoke_job": "https://github.com/ryanholtschneider2/soloco-product-build-v2-dogfood/actions/runs/29226016156/job/86740156875",
+  "identity_url": "https://ryanholtschneider2.github.io/soloco-product-build-v2-dogfood/.well-known/soloco-build.json",
+  "identity_sha": "04196921264d9897e8e547a8e0a2cef1ad43f8fb",
+  "live_browser_proof_passed": true,
+  "evidence_index": "docs/build/evidence-index.json"
+}

@@ -1,24 +1,31 @@
 {
   "schema_version": 1,
-  "graph_version": 1,
+  "graph_version": 2,
   "parent_epic_id": "pbv2-uuv",
   "canonical_integration_branch": "product-build/integration",
+  "canonical_integration_sha": "76f4cced71fee21832fc2402b8efa9ed56b907e3",
+  "release_sha": "04196921264d9897e8e547a8e0a2cef1ad43f8fb",
   "nodes": [
     {
       "id": "pbv2-12b",
       "kind": "implementation",
       "title": "Implement the exact-SHA ProofBook booking outcome",
-      "status": "ready",
+      "status": "integrated",
       "formula": "software-dev-agentic",
       "dependencies": [],
+      "source_branch": "agentic-pbv2-12b",
+      "source_sha": "20382f0910953ad631587f7f1a3b139d5826bb2b",
       "target_branch": "product-build/integration",
+      "integration_sha": "76f4cced71fee21832fc2402b8efa9ed56b907e3",
+      "pr_url": "https://github.com/ryanholtschneider2/soloco-product-build-v2-dogfood/pull/1",
       "write_scope": [
         "index.html",
+        "assets/**",
         "app.py",
+        "build_site.py",
         "tests/**",
         ".github/workflows/ci.yml",
-        "expected.txt",
-        "static build identity files or scripts"
+        "expected.txt"
       ],
       "contract_item_ids": [
         "PB-JOURNEY-001",
@@ -40,18 +47,19 @@
         "Exact-SHA identity and post-deploy smoke"
       ],
       "attempt_key": "pbv2-12b:software-dev-agentic",
-      "attempt_cap": 2
+      "attempt_cap": 3,
+      "attempts_used": 3
     },
     {
-      "id": "proofbook-live-proof",
+      "id": "pbv2-2wo",
       "kind": "proof",
-      "title": "Index exact-SHA launch evidence",
-      "status": "blocked_on_integration",
+      "title": "Capture ProofBook Stage 2 browser and accessibility proof",
+      "status": "verified",
       "formula": "product-live-proof",
       "dependencies": [
         "pbv2-12b"
       ],
-      "target_branch": "product-build/integration",
+      "target_branch": "product-build/reconcile-release",
       "write_scope": [
         "docs/build/evidence/**",
         "docs/build/evidence-index.json",
@@ -59,12 +67,20 @@
         "docs/build/ceo-digest.md"
       ],
       "contract_item_ids": [
+        "PB-JOURNEY-001",
+        "PB-STATE-001",
+        "PB-DURABLE-001",
+        "PB-SHA-001",
+        "PB-DESIGN-001",
+        "PB-A11Y-001",
+        "PB-SEC-001",
+        "PB-PERF-001",
         "PB-GTM-001",
         "PB-LIVE-001"
       ],
       "proof_obligations": [
-        "Every readiness item has current evidence at the canonical integration SHA",
-        "Live preview SHA equals canonical integration SHA",
+        "Every readiness item has current evidence at the release SHA",
+        "Live preview SHA equals the release SHA",
         "Critical customer journey and post-deploy smoke pass"
       ]
     }
@@ -72,7 +88,7 @@
   "edges": [
     {
       "from": "pbv2-12b",
-      "to": "proofbook-live-proof",
+      "to": "pbv2-2wo",
       "type": "blocks"
     }
   ]

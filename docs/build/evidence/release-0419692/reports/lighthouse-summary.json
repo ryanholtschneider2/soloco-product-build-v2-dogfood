@@ -1,0 +1,23 @@
+{
+  "requestedUrl": "https://ryanholtschneider2.github.io/soloco-product-build-v2-dogfood/",
+  "finalUrl": "https://ryanholtschneider2.github.io/soloco-product-build-v2-dogfood/",
+  "fetchTime": "2026-07-13T05:26:30.394Z",
+  "categories": {
+    "performance": {
+      "score": 1
+    },
+    "accessibility": {
+      "score": 1
+    },
+    "best-practices": {
+      "score": 0.96
+    }
+  },
+  "metrics": {
+    "lcp": 836.982,
+    "cls": 0,
+    "totalByteWeight": 13793
+  },
+  "failedAccessibilityAudits": [],
+  "knownBestPracticesFailure": "errors-in-console from the same-origin favicon 404"
+}

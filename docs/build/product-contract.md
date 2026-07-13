@@ -1,8 +1,15 @@
 # ProofBook Stage 2 product contract
 
-Status: defined  
-Contract version: 1  
-Base commit: `db177b063bf36e1137f0c79de0dc211dee14ddce`  
+Status: released
+
+Contract version: 1
+
+Base commit: `db177b063bf36e1137f0c79de0dc211dee14ddce`
+
+Integration commit: `76f4cced71fee21832fc2402b8efa9ed56b907e3`
+
+Release commit: `04196921264d9897e8e547a8e0a2cef1ad43f8fb`
+
 Parent epic: `pbv2-uuv`
 
 ## Product boundary

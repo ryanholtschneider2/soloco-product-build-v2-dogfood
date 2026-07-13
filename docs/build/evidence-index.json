@@ -1,27 +1,82 @@
 {
   "schema_version": 1,
   "product_id": "proofbook",
-  "canonical_sha": null,
-  "preview_url": null,
-  "seed_instructions": "Select the seeded consultation and use a non-production fixture name/email. No customer data leaves the browser.",
-  "status": "not_started",
+  "canonical_sha": "04196921264d9897e8e547a8e0a2cef1ad43f8fb",
+  "integration_sha": "76f4cced71fee21832fc2402b8efa9ed56b907e3",
+  "preview_url": "https://ryanholtschneider2.github.io/soloco-product-build-v2-dogfood/",
+  "seed_instructions": "Select the seeded consultation and use a non-production fixture name/email. The record remains in localStorage and sends no customer data.",
+  "status": "released",
+  "captured_at": "2026-07-13T05:26:30Z",
   "coverage": {
-    "roles": [],
-    "routes": [],
-    "states": [],
-    "viewports": []
+    "roles": [
+      "anonymous customer",
+      "public release verifier"
+    ],
+    "routes": [
+      "/",
+      "/.well-known/soloco-build.json",
+      "unknown route (automated 404 proof)"
+    ],
+    "states": [
+      "initial",
+      "invalid",
+      "submitting and duplicate prevention",
+      "storage error",
+      "unavailable",
+      "confirmed",
+      "same-browser revisit",
+      "malformed storage",
+      "clear and rebook"
+    ],
+    "viewports": [
+      "390x844",
+      "1440x900"
+    ]
   },
   "reports": {
-    "functional": [],
-    "visual": [],
-    "accessibility": [],
-    "security": [],
-    "performance": [],
-    "smoke": [],
-    "product_eval": []
+    "functional": [
+      "docs/build/evidence/release-0419692/reports/functional.md",
+      "docs/build/evidence/release-0419692/reports/repository-gate.txt"
+    ],
+    "visual": [
+      "docs/build/evidence/release-0419692/reports/visual.md"
+    ],
+    "accessibility": [
+      "docs/build/evidence/release-0419692/reports/accessibility.md",
+      "docs/build/evidence/release-0419692/reports/lighthouse-mobile.json"
+    ],
+    "security": [
+      "docs/build/evidence/release-0419692/reports/security.md",
+      "docs/build/evidence/release-0419692/reports/live-headers.txt"
+    ],
+    "performance": [
+      "docs/build/evidence/release-0419692/reports/performance.md",
+      "docs/build/evidence/release-0419692/reports/lighthouse-summary.json"
+    ],
+    "smoke": [
+      "docs/build/evidence/release-0419692/reports/smoke.md",
+      "docs/build/evidence/release-0419692/reports/live-identity.json"
+    ],
+    "product_eval": [
+      "docs/build/evidence/release-0419692/reports/product-eval.md"
+    ]
   },
-  "screenshots": [],
+  "screenshots": [
+    "docs/build/evidence/release-0419692/screenshots/desktop-initial.png",
+    "docs/build/evidence/release-0419692/screenshots/desktop-invalid.png",
+    "docs/build/evidence/release-0419692/screenshots/desktop-confirmed.png",
+    "docs/build/evidence/release-0419692/screenshots/desktop-revisit.png",
+    "docs/build/evidence/release-0419692/screenshots/mobile-initial.png",
+    "docs/build/evidence/release-0419692/screenshots/mobile-confirmed.png",
+    "docs/build/evidence/release-0419692/screenshots/mobile-revisit.png",
+    "docs/build/evidence/release-0419692/screenshots/mobile-storage-error.png",
+    "docs/build/evidence/release-0419692/screenshots/mobile-unavailable.png",
+    "docs/build/evidence/release-0419692/screenshots/mobile-malformed-storage.png"
+  ],
   "video": [],
-  "release_evidence": null,
+  "release_evidence": "docs/build/evidence/release-0419692/release-evidence.json",
+  "known_exceptions": [
+    "The browser requests an undeclared same-origin favicon and receives 404; Lighthouse best-practices is 0.96. No customer journey or acceptance threshold is affected."
+  ],
   "stale_evidence_rejected": true
 }
