@@ -10,6 +10,7 @@ from pathlib import Path
 PRODUCT_ID = "proofbook"
 SHA_LENGTH = 40
 ROOT = Path(__file__).parent
+BUILD_MARKER = ".soloco-static-build"
 
 
 def validate_git_sha(value: str) -> str:
@@ -39,9 +40,19 @@ def build_identity(git_sha: str) -> dict[str, str]:
 
 
 def build_site(output: Path, git_sha: str) -> Path:
+    if output.is_symlink():
+        raise ValueError("build output must not be a symbolic link")
+    output = output.resolve()
+    root = ROOT.resolve()
+    if output == root or output == Path(output.anchor) or output in root.parents:
+        raise ValueError("build output must not be the project root or one of its ancestors")
     if output.exists():
+        marker = output / BUILD_MARKER
+        if not output.is_dir() or not marker.is_file():
+            raise ValueError("refusing to replace an output directory not created by this builder")
         shutil.rmtree(output)
     output.mkdir(parents=True)
+    (output / BUILD_MARKER).write_text("ProofBook static build\n", encoding="utf-8")
     shutil.copy2(ROOT / "index.html", output / "index.html")
     shutil.copytree(ROOT / "assets", output / "assets")
 

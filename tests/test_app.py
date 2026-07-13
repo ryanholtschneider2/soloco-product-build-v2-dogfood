@@ -13,7 +13,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from app import Handler
-from build_site import build_identity, build_site, validate_git_sha
+from build_site import BUILD_MARKER, build_identity, build_site, validate_git_sha
 
 ROOT = Path(__file__).parents[1]
 TEST_SHA = "0123456789abcdef0123456789abcdef01234567"
@@ -38,10 +38,35 @@ class BuildSiteTest(unittest.TestCase):
             self.assertTrue((output / "assets" / "proofbook.js").is_file())
             self.assertTrue((output / "assets" / "proofbook-core.mjs").is_file())
             self.assertTrue((output / "assets" / "styles.css").is_file())
+            self.assertTrue((output / BUILD_MARKER).is_file())
             self.assertEqual(
                 json.loads(identity_path.read_text(encoding="utf-8")),
                 {"product_id": "proofbook", "git_sha": TEST_SHA},
             )
+
+    def test_static_build_can_replace_its_own_prior_output(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "site"
+            build_site(output, TEST_SHA)
+            stale_file = output / "stale.txt"
+            stale_file.write_text("stale", encoding="utf-8")
+
+            build_site(output, TEST_SHA)
+
+            self.assertFalse(stale_file.exists())
+            self.assertTrue((output / BUILD_MARKER).is_file())
+
+    def test_static_build_refuses_to_delete_unowned_output(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "site"
+            output.mkdir()
+            protected_file = output / "keep.txt"
+            protected_file.write_text("keep", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "not created by this builder"):
+                build_site(output, TEST_SHA)
+
+            self.assertEqual(protected_file.read_text(encoding="utf-8"), "keep")
 
 
 class ProductFixtureTest(unittest.TestCase):
