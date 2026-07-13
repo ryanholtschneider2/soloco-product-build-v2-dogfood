@@ -1,13 +1,46 @@
-name: CI
+name: lifecycle
 on:
   pull_request:
   push:
     branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: pages
+  cancel-in-progress: false
 jobs:
-  test:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: "3.13"}
       - run: make lint test
+      - run: grep -F "$(cat expected.txt)" index.html
+  deploy:
+    if: github.event_name == 'push'
+    needs: ci
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.pages.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: mkdir _site && cp index.html expected.txt _site/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: {path: _site}
+      - id: pages
+        uses: actions/deploy-pages@v4
+  smoke:
+    if: github.event_name == 'push'
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsSL --retry 12 --retry-all-errors --retry-delay 5 '${{ needs.deploy.outputs.page_url }}' | grep -F 'Booking confirmed.'
