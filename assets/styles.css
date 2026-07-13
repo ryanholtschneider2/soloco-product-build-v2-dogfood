@@ -376,7 +376,7 @@ input:checked + .choice-mark::after {
 
 .confirmation-mark {
   align-items: center;
-  background: var(--accent);
+  background: var(--accent-dark);
   color: #fffaf4;
   display: flex;
   font-family: Arial, Helvetica, sans-serif;
