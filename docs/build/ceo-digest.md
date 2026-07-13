@@ -19,4 +19,4 @@ The implementation, integration, and release commits are squash-related rather t
 
 The only known exception is a harmless same-origin favicon 404, which lowers Lighthouse best-practices to 0.96 but does not affect an acceptance obligation. `BUSINESS.md` remains absent; existing product, strategy, roadmap, design, contract, and stage configuration are otherwise coherent.
 
-Launch language must remain within the verified fixture: no account, payment, remote inventory, calendar sync, notification, multi-device retrieval, or production booking operations. There is no work in flight, blocker, GTM mismatch, or CEO decision required. The evidence-reconciliation PR is documentation-only and does not change the deployed product SHA.
+Launch language must remain within the verified fixture: no account, payment, remote inventory, calendar sync, notification, multi-device retrieval, or production booking operations. No product work, blocker, GTM mismatch, or CEO decision remains. Documentation-only evidence reconciliation is in flight as PR #3 and does not change the currently deployed product SHA.
