@@ -12,11 +12,11 @@
     "prefect_orchestration_version": "0.2.0",
     "runtime": {
       "backend": "codex-tmux",
-      "provider": "openai",
+      "provider": "codex",
       "account": "codex-personal",
       "account_class": "personal",
-      "model": "gpt-5.5",
-      "effort": "high"
+      "model": "gpt-5.4",
+      "effort": "xhigh"
     }
   },
   "stack": [

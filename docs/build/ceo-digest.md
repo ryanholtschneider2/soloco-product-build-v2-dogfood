@@ -24,8 +24,10 @@ available authoritative inputs.
 ## Evidence and delivery
 
 - Seed main SHA: `db177b063bf36e1137f0c79de0dc211dee14ddce`
-- Seed lifecycle run: queued during this pulse; not accepted as product proof
-- Preview: none attributed to the integration SHA
+- Seed lifecycle run: CI, Pages deploy, and shallow text smoke passed at the
+  base SHA; it is not accepted as Stage 2 product proof
+- Seed preview: `https://ryanholtschneider2.github.io/soloco-product-build-v2-dogfood/`;
+  no preview is yet attributed to the integration SHA
 - Implementation: `pbv2-12b`, ready for `software-dev-agentic`
 - Evidence index: initialized with no evidence; nothing is VERIFIED
 - Blockers: none. Missing implementation and proof are active product work.
