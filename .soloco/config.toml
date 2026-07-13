@@ -1,0 +1,9 @@
+north_star = "release one exact-SHA proof-first booking outcome"
+merge_mode = "auto"
+merge_strategy = "pr"
+ci_cmd = "make lint test"
+
+[[rigs]]
+name = "proofbook"
+path = "."
+code = true

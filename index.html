@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ProofBook</title>
+  <style>
+    body { margin: 0; background: #f4f0e8; color: #17201b; font: 16px/1.5 Georgia, serif; }
+    main { max-width: 760px; margin: 0 auto; padding: 10vh 24px; }
+    h1 { font-size: clamp(3rem, 10vw, 6rem); line-height: .9; letter-spacing: -.06em; }
+    .eyebrow { font: 700 12px/1 system-ui; letter-spacing: .14em; text-transform: uppercase; }
+    .card { border-top: 2px solid #17201b; padding-top: 24px; }
+    button { background: #bd5b38; color: white; border: 0; padding: 14px 20px; font: 700 15px system-ui; cursor: pointer; }
+    #confirmation { margin-top: 32px; padding: 20px; border: 2px solid #17201b; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Proof-first booking</p>
+    <h1>Book the service.</h1>
+    <section class="card">
+      <h2>Seeded consultation</h2>
+      <p>Tomorrow at 10:00 AM · 30 minutes</p>
+      <button id="confirm" type="button">Confirm booking</button>
+      <div id="confirmation" hidden tabindex="-1"><strong>Booking confirmed.</strong><br>Reference PB-2026-0713</div>
+    </section>
+  </main>
+  <script>
+    document.querySelector('#confirm').addEventListener('click', () => {
+      const proof = document.querySelector('#confirmation');
+      proof.hidden = false;
+      proof.focus();
+    });
+  </script>
+</body>
+</html>
